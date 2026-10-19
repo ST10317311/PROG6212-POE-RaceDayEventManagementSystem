@@ -1,0 +1,78 @@
+//1. Create Database
+_______________________________
+create database RaceDayDB;
+
+//2. Create Tables
+_______________________________
+
+					//five participants
+create table Participant(
+	participantID INT PRIMARY KEY,
+	participantName NVARCHAR(256) NOT NULL,
+	participantSurname NVARCHAR(256) NOT NULL,
+	participantAge TINYINT NOT NULL,
+	participantGender NVARCHAR(32) NOT NULL,
+	participantPhoneNumber NVARCHAR(24),
+	participantEmail NVARCHAR(64) NOT NULL,
+	participantPassword NVARCHAR(256) NOT NULL
+);
+
+					//15 entries
+create table Entry(
+	entryID INT PRIMARY KEY,
+	participantID INT FOREIGN KEY REFERENCES Participant(participantID),
+	eventID INT FOREIGN KEY REFERENCES Event(eventID),
+	entryDate DATE,
+);
+
+create table Results(
+	resultID INT PRIMARY KEY,
+	entryID INT FOREIGN KEY REFERENCES Entry(entryID),
+	startTime TIME,
+	endTime TIME,
+	position INT,
+	resultAverageSpeed DECIMAL(5,2),
+	resultStatus NVARCHAR(32)
+);
+
+				//Three event types (walking, running, cycling) only.	
+create table EventType(
+	eventTypeID INT PRIMARY KEY,
+	eventName NVARCHAR(256)
+);
+
+			// Three Events (one for road running, one for walking, and one or cycling)
+create table Event(
+	eventID INT PRIMARY KEY,
+	eventName NVARCHAR(256),
+	eventTypeID INT FOREIGN KEY REFERENCES EventType(eventTypeID),
+	eventLocation NVARCHAR(256),
+	eventStartTime TIME,
+	eventEndTime TIME,
+	organiserID INT FOREIGN KEY REFERENCES Organiser(organiserID)
+);
+
+				//Nine Categories (3 for each event, each event with a different distance)
+create table Category(
+	categoryID INT PRIMARY KEY,
+	eventID INT FOREIGN KEY REFERENCES Event(eventID),
+	categoryName NVARCHAR(256),
+	categoryDistance DECIMAL(10,2),
+	categoryEntryFee SMALLINT,
+	categoryMaxParticipants SMALLINT
+);
+
+			//Three Organisers
+create table Organiser(
+	organiserID INT PRIMARY KEY,
+	organiserName NVARCHAR(256) NOT NULL,
+	organiserSurname NVARCHAR(256),
+	organiserAge TINYINT NOT NULL,
+	organiserPhoneNumber NVARCHAR(24) NOT NULL,
+	organiserEmail NVARCHAR(64) NOT NULL,
+	organiserPassword NVARCHAR(256) NOT NULL
+);
+
+3. Insert Data into the tables
+________________________________________
+
