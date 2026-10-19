@@ -1,0 +1,22 @@
+name: Docs Structure Check (For RaceDayEventManagementSystem)
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    check-docs:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+            - uses: actions/checkout@v4
+
+            - name: Check docs folder
+              run: test -d docs
+
+            - name: Check required files
+              run: |
+                test -f docs/part 1/Section A - ERD.png
+                test -f docs/part 1/Section B - API Endpoint Table.md
+                test -f docs/part 1/Section C - SQL DB Script.txt
