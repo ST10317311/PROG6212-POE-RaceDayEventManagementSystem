@@ -3,6 +3,7 @@
 ## Update on Part 2:
 
 The code from my Part 2 does not want to appear on my main branch, so I am going to upload the code to a new github link, which I will paste on my ReadME.md file right here.
+https://github.com/ST10317311/PROG6212-POE-Part-2
 
 Part 1
 
